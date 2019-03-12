@@ -7,7 +7,7 @@ See: `src/main/scala/hello/world/App.scala`
 ### Usage:
 ```
 $ sbt
-$ sbt-dev
+$ sbt dev
 ```
 
 Go to: http://localhost:8080
