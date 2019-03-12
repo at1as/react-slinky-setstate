@@ -12,31 +12,31 @@ import org.scalajs.dom.raw.Event
   type Props = Unit
 
   case class State(
-    optionString: Option[Int],
+    optionInt: Option[Int],
     iteration: Int,
     message: String
   )
 
   override def initialState = State(
-    optionString = Some(123),
-    iteration    = 0,
-    message      = ""
+    optionInt = Some(0),
+    iteration = 0,
+    message   = ""
   )
 
   def handleClick(e: Event): Unit = {
-    val newOptionVal = if (state.iteration % 3 == 0) None else state.optionString.map(_ + 1)
-    val message      = s"1. [ITERATION ${state.iteration}] Updating optionString value from: ${state.optionString} ===> ${newOptionVal}"
+    val newOptionVal = if (state.iteration % 3 == 0) None else Some(state.iteration + 1)
+    val message      = s"1. [ITERATION ${state.iteration}] Updating optionInt value from: ${state.optionInt} ===> ${newOptionVal}"
     println(message)
 
     setState(_.copy(
-      optionString = newOptionVal,
+      optionInt = newOptionVal,
       iteration    = state.iteration + 1,
       message      = message
     ), () => {
-      println(s"2. [ITERATION ${state.optionString}] optionString value is ${state.optionString} in setState callback")
+      println(s"2. [ITERATION ${state.optionInt}] optionInt value is ${state.optionInt} in setState callback")
     })
 
-    println(s"3. [ITERATION ${state.optionString}] optionString value is ${state.optionString} after setState updates")
+    println(s"3. [ITERATION ${state.optionInt}] optionInt value is ${state.optionInt} after setState updates")
   }
 
   def render() = {
@@ -52,7 +52,7 @@ import org.scalajs.dom.raw.Event
       br(),
       br(),
       h3(s"CurrentState:"),
-      p(s"   => On iteration ${state.iteration}: the state is ${state.optionString}")
+      p(s"   => On iteration ${state.iteration}: the state is ${state.optionInt}")
     )
   }
 }
